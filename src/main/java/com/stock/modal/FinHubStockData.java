@@ -1,8 +1,6 @@
 package com.stock.modal;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-public class StockData {
+public class FinHubStockData {
 
     private String c;
     private String d;

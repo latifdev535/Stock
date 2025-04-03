@@ -1,4 +1,4 @@
-package com.stock.conf;
+package com.stock.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

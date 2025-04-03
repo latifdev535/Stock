@@ -1,13 +1,20 @@
 package com.stock.modal;
 
-import lombok.Data;
-
 
 public class User {
 
     private Integer id;
     private String userName;
     private String password;
+    private String activeStatus;
+
+    public String getActiveStatus() {
+        return activeStatus;
+    }
+
+    public void setActiveStatus(String activeStatus) {
+        this.activeStatus = activeStatus;
+    }
 
     public Integer getId() {
         return id;

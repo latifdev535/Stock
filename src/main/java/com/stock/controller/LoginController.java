@@ -14,7 +14,6 @@ public class LoginController {
 
     @PostMapping("/login")
     public LoginResponse loginUser(@RequestBody LoginRequest loginRequest) {
-        System.out.println(loginRequest);
         return loginService.loginUser(loginRequest);
     }
 

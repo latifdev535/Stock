@@ -20,13 +20,14 @@ public class StockHistDao {
     NamedParameterJdbcTemplate jdbcTemplate;
 
     public List<StockHist> getStockHist(String userId) {
-        List<StockHist> stockHistList = new ArrayList<>();
-        stockHistList = jdbcTemplate.query(SQL_HIST, Map.of(USERID, userId),(rs,v)->{
+        final List<StockHist> stockHistList = new ArrayList<>();
+        jdbcTemplate.query(SQL_HIST, Map.of(USERID, userId),(rs,v)->{
             StockHist stockHist = new StockHist();
             stockHist.setStockSymbol(rs.getString(STOCK_SYMBOL));
             stockHist.setQty(rs.getString(STOCK_QTY));
             stockHist.setDateTime(rs.getString("CREATED_DATE"));
             stockHist.setOperation(rs.getString("STOCK_OPERATION"));
+            stockHistList.add(stockHist);
             return stockHist;
         });
 

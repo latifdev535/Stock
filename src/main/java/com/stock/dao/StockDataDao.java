@@ -5,6 +5,7 @@ import com.stock.modal.UserStockData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -74,6 +75,8 @@ public class StockDataDao {
                 }
             });
 
+        } catch (EmptyResultDataAccessException ex) {
+            LOGGER.error("Error fetching the data for userId {}", userId);
         } catch (Exception e) {
             LOGGER.error("Error fetching the data for userId {}", userId, e);
         }

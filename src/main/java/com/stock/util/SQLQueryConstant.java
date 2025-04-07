@@ -8,7 +8,7 @@ public class SQLQueryConstant {
     public static final String SQL_INSERT_STOCK = "INSERT INTO USER_STOCK_DATA (STOCK_QTY,USER_ID,STOCK_SYMBOL) values(?,?,?)";
     public static final String SQL_INSERT_STOCK_HIST = "INSERT INTO USER_STOCK_DATA_HIST (stock_data_id,stock_qty,stock_operation) values(?,?,?)";
     public static final String SQL_UPDATE_STOCK = "UPDATE USER_STOCK_DATA SET STOCK_QTY=? where USER_ID=? and STOCK_SYMBOL=?";
-    public static final String SQL_HIST = "SELECT S.USER_ID,S.STOCK_SYMBOL,S.STOCK_QTY,H.CREATED_DATE,H.STOCK_OPERATION FROM USER_STOCK_DATA_HIST H, USER_STOCK_DATA S WHERE " +
+    public static final String SQL_HIST = "SELECT S.USER_ID,S.STOCK_SYMBOL,H.STOCK_QTY,H.CREATED_DATE,H.STOCK_OPERATION FROM USER_STOCK_DATA_HIST H, USER_STOCK_DATA S WHERE " +
             "S.ID=H.STOCK_DATA_ID AND S.USER_ID=:USERID";
 
 

@@ -2,7 +2,6 @@ package com.stock.controller;
 
 import com.stock.controller.request.StockTradeRequest;
 import com.stock.controller.response.StockHistResponse;
-import com.stock.controller.response.StockSearchResponse;
 import com.stock.controller.response.StockTradeResponse;
 import com.stock.controller.response.UserPortfolioResponse;
 import com.stock.modal.*;
@@ -11,15 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.Objects;
-
 @RestController
 public class StockController {
 
 
     @Autowired
     private StockService stockService;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
 //    @GetMapping("/stocklist/{search}")
 //    public StockSearchResponse getStockList(@PathVariable("search") String search) {
@@ -38,10 +37,7 @@ public class StockController {
 
     @GetMapping("/stock/{symbol}")
     public FinHubStockData getCurrentPrice(@PathVariable("symbol") String symbol) {
-       String uri =  "https://finnhub.io/api/v1/quote?symbol="+symbol+"&token=cvlhvdpr01qj3umdh5h0cvlhvdpr01qj3umdh5hg";
-        RestTemplate restTemplate = new RestTemplate();
-        FinHubStockData forObject = restTemplate.getForObject(uri, FinHubStockData.class);
-        return forObject;
+        return stockService.getCurrentPrice(symbol);
     }
 
     @PostMapping("/trade-stock")

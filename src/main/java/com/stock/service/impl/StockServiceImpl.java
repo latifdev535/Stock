@@ -31,7 +31,7 @@ public class StockServiceImpl implements StockService {
     @Autowired
     private StockHistDao stockHistDao;
 
-    @Autowired(required = false)
+    @Autowired
     private RestTemplate restTemplate;
 
     @Override
@@ -41,8 +41,6 @@ public class StockServiceImpl implements StockService {
         UserPortfolioResponse userPortfolioResponse = new UserPortfolioResponse();
         List<UserStockData> userPortfolio = stockDataDao.getUserPortfolio(userId);
         userPortfolioResponse.setPortfolioData(userPortfolio);
-
-        RestTemplate restTemplate = new RestTemplate();
 
         for (UserStockData userStockData : userPortfolio) {
             String uri =  finHubStockUrl.concat(userStockData.getStockSymbol()).concat("&token=").concat(finHubApiToken);
@@ -81,6 +79,11 @@ public class StockServiceImpl implements StockService {
         stockHistResponse.setStatus(Status.SUCCESS);
         stockHistResponse.setStockHistList(stockHist);
         return stockHistResponse;
+    }
+
+    @Override
+    public FinHubStockData getCurrentPrice(String symbol) {
+        return restTemplate.getForObject(finHubStockUrl.concat(symbol).concat("&token=").concat(finHubApiToken), FinHubStockData.class);
     }
 
 }
